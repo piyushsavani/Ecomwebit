@@ -6,8 +6,10 @@ use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\ColorController;
 use App\Http\Controllers\admin\SliderController;
 use App\Http\Controllers\admin\ProductController;
+use App\Http\Controllers\frontend\CartController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\frontend\CheckoutController;
 use App\Http\Controllers\frontend\FrontendController;
 use App\Http\Controllers\frontend\WishlistController;
 
@@ -40,7 +42,12 @@ Route::controller(FrontendController::class)->group(function(){
 
 Route::middleware(['auth'])->group(function(){
     Route::get('wishlist', [WishlistController::class, 'index']);
+    Route::get('cart', [CartController::class, 'index']);
+    Route::get('checkout', [CheckoutController::class, 'index']);
 });
+
+Route::get('thank-you', [FrontendController::class, 'thankYou']);
+
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 

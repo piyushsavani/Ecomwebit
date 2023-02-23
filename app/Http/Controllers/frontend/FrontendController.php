@@ -44,8 +44,11 @@ class FrontendController extends Controller
         }
         else{
             return redirect()->back();
-        }
+        }        
+    }
 
-        
+    public function thankYou()
+    {
+        return view('frontend.checkout.thank-you');
     }
 }

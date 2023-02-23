@@ -1,4 +1,7 @@
 <div>
+@if(session('message'))
+<div class="alert alert-success"> {{ session('message') }} </div>
+@endif
     <div class="row">
         <div class="col-md-3">
             <h5>Brands</h5>
@@ -44,9 +47,9 @@
                             <!-- <span class="original-price">${{$product->original_price}}</span> -->
                         </div>
                         <div class="mt-2">
-                            <a href="" class="btn btn1">Add To Cart</a>
+                            <button type="button" wire:click="addToCart({{ $product->id }}, {{$product->selling_price}} )" class="btn btn1">Add To Cart</button>
                             <a href="" class="btn btn1"> <i class="fa fa-heart"></i> </a>
-                            <a href="" class="btn btn1"> View </a>
+                            <a href="{{ url('collections/'.$product->category->slug.'/'.$product->product_slug) }}" class="btn btn1"> View </a>
                         </div>
                     </div>
                 </div>

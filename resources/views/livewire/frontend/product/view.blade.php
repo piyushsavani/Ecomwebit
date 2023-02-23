@@ -19,27 +19,27 @@
                             Home / {{$category->name}} / {{$product->product_name}} / {{$product->brand}}
                         </p>
                         <div>
-                            <span class="selling-price">Rs. {{$product->selling_price}}</span>
+                            <input type="hidden" wire:model="price" value="{{ $product->selling_price }}" class="selling-price">
+                            <span wire:model="price" class="selling-price">Rs. {{$product->selling_price}}</span>
                         </div><br>
 
                         @if($product->productColors)
-                        @foreach($product->productColors as $colorItem)
-                        <button type="radio" wire:click="colorQuantity({{ $colorItem->id }})" name="colorSelection" value=" {{$colorItem->id}}" style="background-color: {{ $colorItem->colors->color_code }} " class="btn-sm"> {{$colorItem->colors->color_name}} </button>
+                        @foreach($product->productColors as $productColor)
+                        <button type="radio" wire:click="colorSelection({{ $productColor->id }})" name="colorSelection" value=" {{$productColor->id}}" style="background-color: {{ $productColor->colors->color_code }} " class="btn-sm"> {{$productColor->colors->color_name}} </button>
                         @endforeach                        
                        
-                        @if($prodQuantityAll=="OutOfStock")
-                        <label class="label-stock bg-danger btn-sm text-white">Out of Stock</label>
+                            @if($selectedProductColorTotalQty == 'OutOfStock')                            
+                            <label class="label-stock bg-danger btn-sm text-white">Out of Stock</label>  
+                            @else         
+                            <label class="label-stock bg-success btn-sm text-white">In Stock </label>            
+                            @endif
                         @else
-                        <label class="label-stock bg-success btn-sm text-white">In Stock</label>
-                        @endif
-                        @else
-                        @if($product->qauntity > 0)
-                        <label class="stock bg-success text-white">In Stock</label>
-                        @else
-                        <label class="stock bg-danger text-white">Out of Stock</label>
-                        @endif
-                        @endif
-                        
+                            @if($product->qauntity > 0)                            
+                            <label class="stock bg-danger text-white">Out of Stock</label>
+                            @else
+                            <label class="stock bg-success text-white">In Stock</label>
+                            @endif
+                        @endif                        
 
                         <div class="mt-2">
                             <div class="input-group">
@@ -49,7 +49,7 @@
                             </div>
                         </div>
                         <div class="mt-2">
-                            <button type="button" wire:click="addToCart({{ $product->id }})" class="btn btn1"> 
+                            <button type="button" wire:click="addToCart({{ $product->id }}, {{ $product->selling_price }})" class="btn btn1"> 
                                 <i class="fa fa-shopping-cart"></i> Add To Cart
                             </button>
 

@@ -1,0 +1,63 @@
+ if(Auth::check())
+        {
+            $this->price = $price;
+            // dd(auth()->user()->id);
+            
+            if(Cart::where('user_id', auth()->user()->id)->where('product_id', $productId)->exists())
+            {
+                session()->flash('message','Already added this product in cart');
+                return redirect()->back();                
+            }
+            else 
+            {                
+                if ($this->product->where('id',$productId)) 
+                { 
+                    if($this->product->productColors()->count() > 0) 
+                    {
+                        if($this->product->productColors()->where('id',$this->$productColorId)->quantity > $this->qty)
+                        {                           
+                            Cart::create([
+                                'user_id' => auth()->user()->id,
+                                'product_id' => $productId,
+                                'quantity' => $this->qty,
+                                'price' => $this->price,
+                                'color_id' => $productColorId
+                            ]);
+                            session()->flash('message','Added the product in cart');
+                            return redirect()->back(); 
+                        } 
+                        else
+                        {
+                            session()->flash('message','Less Quantity available');
+                            return redirect()->back(); 
+                        }
+
+                    } else {
+                        if($this->product->where('id',$this->$productId)->quantity > $this->qty)
+                        {
+                            Cart::create([
+                                'user_id' => auth()->user()->id,
+                                'product_id' => $productId,
+                                'quantity' => $this->qty,
+                                'price' => $this->price
+                            ]);
+                            session()->flash('message','Added the product in cart');
+                            return redirect()->back();
+                        } 
+                        else 
+                        {
+                            session()->flash('message','Not this much Quantity available');
+                        }      
+                    }
+                } 
+                else 
+                {                        
+                    session()->flash('message','Not such product available');
+                }
+            }
+        } 
+        else 
+        {
+            session()->flash('message','Please login First');
+            return redirect()->back();
+        }
