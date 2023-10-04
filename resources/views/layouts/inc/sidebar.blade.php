@@ -7,24 +7,28 @@
                 <i class="mdi mdi-home menu-icon"></i>
               </a>
             </li>
+
             <li class="nav-item">
-              <a class="nav-link" href="{{ url('admin/category')}}">
-                <span class="menu-title">Category</span>
-               
+              <a class="nav-link" href="{{ url('admin/orders') }}">
+                <span class="menu-title">Orders</span>                
               </a>
             </li>
 
             <li class="nav-item">
-              <a class="nav-link" href="{{ url('admin/brands')}}">
-                <span class="menu-title">Brands</span>
-                
+              <a class="nav-link" href="{{ url('admin/category')}}">
+                <span class="menu-title">Category</span>               
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url('admin/brands') }}">
+                <span class="menu-title">Brands</span>                
               </a>
             </li>
 
             <li class="nav-item">
               <a class="nav-link" href={{ url('admin/products') }}>
-                <span class="menu-title">Products</span>   
-                
+                <span class="menu-title">Products</span>                 
               </a>
             </li>
 
@@ -33,11 +37,14 @@
                 <span class="menu-title">Colors</span>               
               </a>
             </li>
+
+
             <li class="nav-item">
               <a class="nav-link" href={{ url('admin/sliders') }}>
                 <span class="menu-title">Sliders</span>               
               </a>
             </li>
+
           </ul>           
             
         </nav>

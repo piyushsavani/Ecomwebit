@@ -34,8 +34,7 @@ class ProductFormValidation extends FormRequest
             'image'=> ['nullable'],
             'meta_description'=> ['nullable'],
             'meta_title'=> ['nullable'],
-            'meta_keyword'=> ['nullable'],     
-            
+            'meta_keyword'=> ['nullable'],                 
         ];
     }
 }

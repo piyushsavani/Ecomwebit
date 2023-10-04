@@ -32,9 +32,8 @@ toastr.error("{{ session()->get('errors')->first() }}");
             <select name="brand" class="form-control">                
                     @foreach($brands as $brand)
                     <option value="{{ $brand->name }}"> {{ $brand->name }} </option>
-                    @endforeach
-                    
-                </select>
+                    @endforeach                    
+            </select>
             </div>
             <div class="col-md-4 mb-2">
                 <label for="slug">Product slug</label>

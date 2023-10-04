@@ -2,8 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Order;
+use App\Models\Product;
+use App\Models\admin\ProductColor;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class OrderItem extends Model
 {
@@ -18,4 +22,15 @@ class OrderItem extends Model
         'quantity',
         'price',
     ];
+
+    public function product(): BelongsTo
+    {
+        return $this->belongsTo(Product::class, 'product_id', 'id');
+    }
+
+    public function orderItemColor(): BelongsTo
+    {
+        return $this->belongsTo(ProductColor::class, 'product_color_id', 'id');
+    }
+
 }

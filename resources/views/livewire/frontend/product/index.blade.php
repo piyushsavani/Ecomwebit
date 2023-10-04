@@ -32,7 +32,7 @@
 
                         @if($product->productImages)
                         <a href="{{ url('collections/'.$product->category->slug.'/'.$product->product_slug) }}"> <img
-                                src="{{ asset($product->productImages[0]->image) }}" alt="NO Img"></a>
+                                src="{{ asset($product->productImages[0]->image) }}" class="img-fluid" alt="NO Img"></a>
                         @endif
                     </div>
                     <div class="product-card-body">

@@ -38,7 +38,7 @@ class LoginController extends Controller
         return redirect('admin/dashboard')->with('message','Welcome to dashboard');
     }
     else {
-        return redirect('/home')->with('message','You are logged in successfully');
+        return redirect('/')->with('message','You are logged in successfully');
     }
 }
     /**

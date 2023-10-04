@@ -2,28 +2,20 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\frontend\NewArrivals;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\ColorController;
+use App\Http\Controllers\admin\OrdersController;
 use App\Http\Controllers\admin\SliderController;
 use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\frontend\CartController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\frontend\OrderController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\frontend\CheckoutController;
 use App\Http\Controllers\frontend\FrontendController;
 use App\Http\Controllers\frontend\WishlistController;
 
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
 Route::get('/', function () {
     return view('welcome');
@@ -44,9 +36,12 @@ Route::middleware(['auth'])->group(function(){
     Route::get('wishlist', [WishlistController::class, 'index']);
     Route::get('cart', [CartController::class, 'index']);
     Route::get('checkout', [CheckoutController::class, 'index']);
+    Route::get('orders', [OrderController::class, 'index']);
+    Route::get('orders/{id}', [OrderController::class, 'show']);
 });
 
 Route::get('thank-you', [FrontendController::class, 'thankYou']);
+Route::get('new-arrivals', [NewArrivals::class, 'newArrivals']);
 
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
@@ -86,6 +81,16 @@ Route::prefix('admin')->middleware(['auth','isAdmin'])->group(function()
         Route::get('/sliders/{sliderId}/delete',[SliderController::class, 'delete']);
 
     });
+    });
+
+    Route::controller(OrdersController::class)->group(function(){    
+        Route::get('/orders',[OrdersController::class, 'index']);     
+        Route::get('/orders/{orderId}',[OrdersController::class, 'show']);     
+        Route::put('/orders/{orderId}',[OrdersController::class, 'update']);   
+        
+        Route::get('/order/{orderId}',[OrdersController::class, 'viewInvoice']);     
+        Route::get('/order/{orderId}/generate',[OrdersController::class, 'downloadInvoice']);     
+
     });
 
 });
